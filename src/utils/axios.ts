@@ -1,3 +1,13 @@
+/*
+ * @Author: wenreq 294491328@qq.com
+ * @Date: 2022-11-02 10:35:24
+ * @LastEditors: wenreq 294491328@qq.com
+ * @LastEditTime: 2022-11-02 21:54:00
+ * @FilePath: /V3_Project/src/utils/axios.ts
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by wenreq 294491328@qq.com, All Rights Reserved. 
+ */
 import axios from 'axios'
 import router from '@/router'
 import config from '~/config'
@@ -30,3 +40,5 @@ axios.interceptors.response.use(res => {
 
   return res.data.data
 })
+
+export default axios

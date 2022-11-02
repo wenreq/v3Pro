@@ -1,11 +1,43 @@
 <script setup lang="ts">
+import { reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { localGet, pathMap } from '@/utils'
+
 const ENV = import.meta.env;
 console.log(ENV);
+
+// 不需要菜单的路径数组
+const noMenu = ['/login']
+const router = useRouter()
+const state = reactive({
+  showMenu: true, // 是否需要显示菜单
+})
+// 监听路由变化
+router.beforeEach((to, from, next) => {
+  if (to.path == '/login') {
+    // 如果路径是 /login 则正常执行
+    next()
+  } else {
+    // 如果不是 /login，判断是否有 token
+    if (!localGet('token')) {
+      // 如果没有，则跳至登录页面
+      next({ path: '/login' })
+    } else {
+      // 否则继续执行
+      next()
+    }
+  }
+  debugger
+  state.showMenu = !noMenu.includes(to.path)
+  document.title = pathMap[to.name]
+})
+
+
 </script>
 
 <template>
   <div class="layout">
-    <el-container class="container">
+    <el-container v-if="state.showMenu" class="container">
       <el-aside class="aside">
         <!--系统名称+logo-->
         <div class="head">
@@ -41,6 +73,9 @@ console.log(ENV);
         </div>
         <Footer />
       </el-container>
+    </el-container>
+    <el-container v-else class="container">
+      <router-view />
     </el-container>
   </div>
 </template>
