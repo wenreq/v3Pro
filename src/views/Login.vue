@@ -123,10 +123,10 @@ const resetForm = () => {
     width: 70%;
     margin: 0 auto;
   }
-  .login-form >>> .el-form--label-top .el-form-item__label {
+  .login-form :deep(.el-form--label-top .el-form-item__label) {
     padding: 0;
   }
-  .login-form >>> .el-form-item {
+  .login-form :deep(.el-form-item) {
     margin-bottom: 0;
   }
 </style>
