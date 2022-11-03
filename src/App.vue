@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { reactive, toRefs } from 'vue'
-import { useRouter } from 'vue-router'
-import { localGet, pathMap } from '@/utils'
+import { reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
+import { localGet, pathMap } from "@/utils";
 
 const ENV = import.meta.env;
 console.log(ENV);
 
 // 不需要菜单的路径数组
-const noMenu = ['/login']
-const router = useRouter()
+const noMenu = ["/login"];
+const router = useRouter();
 const state = reactive({
   showMenu: true, // 是否需要显示菜单
-})
+  defaultOpen: ["1", "2"],
+  currentPath: "/",
+});
 // 监听路由变化
 router.beforeEach((to, from, next) => {
-  if (to.path == '/login') {
+  if (to.path == "/login") {
     // 如果路径是 /login 则正常执行
-    next()
+    next();
   } else {
     // 如果不是 /login，判断是否有 token
-    if (!localGet('token')) {
+    if (!localGet("token")) {
       // 如果没有，则跳至登录页面
-      next({ path: '/login' })
+      next({ path: "/login" });
     } else {
       // 否则继续执行
-      next()
+      next();
     }
   }
-  debugger
-  state.showMenu = !noMenu.includes(to.path)
-  document.title = pathMap[to.name]
-})
-
-
+  state.showMenu = !noMenu.includes(to.path);
+  state.currentPath = to.path;
+  document.title = pathMap[to.name];
+});
 </script>
 
 <template>
@@ -48,7 +48,13 @@ router.beforeEach((to, from, next) => {
         </div>
         <!--一条为了美观的线条-->
         <div class="line" />
-        <el-menu background-color="#222832" text-color="#fff" :router="true">
+        <el-menu
+          background-color="#222832"
+          text-color="#fff"
+          :router="true"
+          :default-openeds="state.defaultOpen"
+          :default-active="state.currentPath"
+        >
           <!--一级栏目-->
           <el-sub-menu index="1">
             <template #title>
@@ -56,10 +62,28 @@ router.beforeEach((to, from, next) => {
             </template>
             <!--二级栏目-->
             <el-menu-item-group>
-              <el-menu-item index="/"
-                ><el-icon><DataLine /></el-icon>首页</el-menu-item
-              >
-              <el-menu-item index="/add"><el-icon><DataLine /></el-icon>添加商品</el-menu-item>
+              <el-menu-item index="/">
+                <el-icon>
+                  <DataLine /> </el-icon
+                >首页
+              </el-menu-item>
+              <el-menu-item index="/add">
+                <el-icon>
+                  <Plus /> </el-icon
+                >添加商品
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>
+              <span>首页配置</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/swiper">
+                <el-icon>
+                  <Picture /> </el-icon
+                >轮播图配置
+              </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -85,30 +109,36 @@ router.beforeEach((to, from, next) => {
   min-height: 100vh;
   background-color: #ffffff;
 }
+
 .container {
   height: 100vh;
 }
+
 .aside {
   width: 200px !important;
   background-color: #222832;
 }
+
 .content {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
   overflow: hidden;
 }
+
 .main {
   height: calc(100vh - 100px);
   overflow: auto;
   padding: 10px;
 }
+
 .head {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
 }
+
 .head > div {
   display: flex;
   align-items: center;
@@ -119,10 +149,12 @@ router.beforeEach((to, from, next) => {
   height: 50px;
   margin-right: 10px;
 }
+
 .head span {
   font-size: 20px;
   color: #ffffff;
 }
+
 .line {
   border-top: 1px solid hsla(0, 0%, 100%, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
