@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2022-11-02 10:35:24
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2022-11-05 08:56:59
+ * @LastEditTime: 2022-11-06 17:28:32
  * @FilePath: /V3_Project/src/utils/axios.ts
  * @Description: axios 二次封装
  *
@@ -14,6 +14,20 @@ import config from '~/config';
 // ts Notice: This is error message; it is must configure the tsconfig file "baseUrl" and "paths" properties
 import { ElMessage } from 'element-plus';
 import { localGet } from './index';
+
+// 处理  类型“AxiosResponse<any, any>”上不存在属性“errorinfo”。ts(2339) 脑壳疼！关键一步。
+declare module 'axios' {
+  interface AxiosResponse<T = any> {
+    list: null;
+    carouselUrl: null;
+    redirectUrl: null;
+    carouselRank: null;
+    totalCount: null;
+    currPage: null;
+    // 这里追加你的参数
+  }
+  export function create(config?: AxiosRequestConfig): AxiosInstance;
+}
 
 axios.defaults.baseURL = config[import.meta.env.MODE].baseUrl;
 // 携带 cookie，对目前的项目没有什么作用，因为我们是 token 鉴权

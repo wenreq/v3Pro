@@ -2,7 +2,7 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2022-11-06 11:41:36
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2022-11-06 14:03:29
+ * @LastEditTime: 2022-11-06 16:48:36
  * @FilePath: /V3_Project/.eslintrc.js
  * @Description:
  *
@@ -13,6 +13,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    commonjs: true,
   },
   extends: [
     'eslint:recommended',

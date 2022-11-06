@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {reactive, toRefs} from 'vue';
-import {useRouter} from 'vue-router';
-import {localGet, pathMap} from '@/utils';
+import { reactive, toRefs } from 'vue';
+import { useRouter } from 'vue-router';
+import { localGet, pathMap } from '@/utils';
 
 const ENV = import.meta.env;
 console.log(ENV);
@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
     // 如果不是 /login，判断是否有 token
     if (!localGet('token')) {
       // 如果没有，则跳至登录页面
-      next({path: '/login'});
+      next({ path: '/login' });
     } else {
       // 否则继续执行
       next();
@@ -78,6 +78,15 @@ router.beforeEach((to, from, next) => {
               <el-menu-item index="/swiper">
                 <el-icon> <Picture /> </el-icon>轮播图配置
               </el-menu-item>
+              <el-menu-item index="/hot"
+                ><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item
+              >
+              <el-menu-item index="/new"
+                ><el-icon><Sell /></el-icon>新品上线配置</el-menu-item
+              >
+              <el-menu-item index="/recommend"
+                ><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item
+              >
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
