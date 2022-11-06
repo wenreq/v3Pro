@@ -2,11 +2,10 @@
  * @Author: wenreq 294491328@qq.com
  * @Date: 2022-11-01 22:13:08
  * @LastEditors: wenreq 294491328@qq.com
- * @LastEditTime: 2022-11-03 18:48:54
+ * @LastEditTime: 2022-11-06 13:55:57
  * @FilePath: /V3_Project/src/views/Index.vue
- * @Description: 
- * 
- * Copyright (c) 2022 by wenreq 294491328@qq.com, All Rights Reserved. 
+ * @Description:
+ * Copyright (c) 2022 by wenreq 294491328@qq.com, All Rights Reserved.
 -->
 <template>
   <el-card class="introduce">
@@ -36,60 +35,68 @@
         <div class="item">20%</div>
       </el-card>
     </div>
-    <div id='zoom'></div>
+    <div id="zoom"></div>
   </el-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue';
 
-let myChart = null
+let myChart = null;
 
 onMounted(() => {
-  debugger
+  debugger;
   if (window.echarts) {
     // 基于准备好的dom，初始化echarts实例
-    myChart = window.echarts.init(document.getElementById('zoom'))
+    myChart = window.echarts.init(document.getElementById('zoom'));
 
     // 指定图表的配置项和数据
     const option = {
       title: {
-        text: '系统折线图'
+        text: '系统折线图',
       },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
           label: {
-            backgroundColor: '#6a7985'
-          }
-        }
+            backgroundColor: '#6a7985',
+          },
+        },
       },
       legend: {
-        data: ['新增注册', '付费用户', '活跃用户', '订单数', '当日总收入']
+        data: ['新增注册', '付费用户', '活跃用户', '订单数', '当日总收入'],
       },
       toolbox: {
         feature: {
-          saveAsImage: {}
-        }
+          saveAsImage: {},
+        },
       },
       grid: {
         left: '3%',
         right: '4%',
         bottom: '3%',
-        containLabel: true
+        containLabel: true,
       },
       xAxis: [
         {
           type: 'category',
           boundaryGap: false,
-          data: ['2021-03-11', '2021-03-12', '2021-03-13', '2021-03-14', '2021-03-15', '2021-03-16', '2021-03-17']
-        }
+          data: [
+            '2021-03-11',
+            '2021-03-12',
+            '2021-03-13',
+            '2021-03-14',
+            '2021-03-15',
+            '2021-03-16',
+            '2021-03-17',
+          ],
+        },
       ],
       yAxis: [
         {
-          type: 'value'
-        }
+          type: 'value',
+        },
       ],
       series: [
         {
@@ -98,9 +105,9 @@ onMounted(() => {
           stack: '总量',
           areaStyle: {},
           emphasis: {
-            focus: 'series'
+            focus: 'series',
           },
-          data: [120, 132, 101, 134, 90, 230, 210]
+          data: [120, 132, 101, 134, 90, 230, 210],
         },
         {
           name: '付费用户',
@@ -108,9 +115,9 @@ onMounted(() => {
           stack: '总量',
           areaStyle: {},
           emphasis: {
-            focus: 'series'
+            focus: 'series',
           },
-          data: [220, 182, 191, 234, 290, 330, 310]
+          data: [220, 182, 191, 234, 290, 330, 310],
         },
         {
           name: '活跃用户',
@@ -118,9 +125,9 @@ onMounted(() => {
           stack: '总量',
           areaStyle: {},
           emphasis: {
-            focus: 'series'
+            focus: 'series',
           },
-          data: [150, 232, 201, 154, 190, 330, 410]
+          data: [150, 232, 201, 154, 190, 330, 410],
         },
         {
           name: '订单数',
@@ -128,9 +135,9 @@ onMounted(() => {
           stack: '总量',
           areaStyle: {},
           emphasis: {
-            focus: 'series'
+            focus: 'series',
           },
-          data: [320, 332, 301, 334, 390, 330, 320]
+          data: [320, 332, 301, 334, 390, 330, 320],
         },
         {
           name: '当日总收入',
@@ -138,24 +145,24 @@ onMounted(() => {
           stack: '总量',
           label: {
             show: true,
-            position: 'top'
+            position: 'top',
           },
           areaStyle: {},
           emphasis: {
-            focus: 'series'
+            focus: 'series',
           },
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
-    }
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+        },
+      ],
+    };
 
     // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option)
-  } 
-})
+    myChart.setOption(option);
+  }
+});
 onUnmounted(() => {
-  myChart.dispose()
-})
+  myChart.dispose();
+});
 </script>
 
 <style scoped>

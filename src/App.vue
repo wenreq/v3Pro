@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
-import { localGet, pathMap } from "@/utils";
+import {reactive, toRefs} from 'vue';
+import {useRouter} from 'vue-router';
+import {localGet, pathMap} from '@/utils';
 
 const ENV = import.meta.env;
 console.log(ENV);
 
 // 不需要菜单的路径数组
-const noMenu = ["/login"];
+const noMenu = ['/login'];
 const router = useRouter();
 const state = reactive({
   showMenu: true, // 是否需要显示菜单
-  defaultOpen: ["1", "2"],
-  currentPath: "/",
+  defaultOpen: ['1', '2'],
+  currentPath: '/',
 });
 // 监听路由变化
 router.beforeEach((to, from, next) => {
-  if (to.path == "/login") {
+  if (to.path == '/login') {
     // 如果路径是 /login 则正常执行
     next();
   } else {
     // 如果不是 /login，判断是否有 token
-    if (!localGet("token")) {
+    if (!localGet('token')) {
       // 如果没有，则跳至登录页面
-      next({ path: "/login" });
+      next({path: '/login'});
     } else {
       // 否则继续执行
       next();
@@ -63,14 +63,10 @@ router.beforeEach((to, from, next) => {
             <!--二级栏目-->
             <el-menu-item-group>
               <el-menu-item index="/">
-                <el-icon>
-                  <DataLine /> </el-icon
-                >首页
+                <el-icon> <DataLine /> </el-icon>首页
               </el-menu-item>
               <el-menu-item index="/add">
-                <el-icon>
-                  <Plus /> </el-icon
-                >添加商品
+                <el-icon> <Plus /> </el-icon>添加商品
               </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
@@ -80,9 +76,7 @@ router.beforeEach((to, from, next) => {
             </template>
             <el-menu-item-group>
               <el-menu-item index="/swiper">
-                <el-icon>
-                  <Picture /> </el-icon
-                >轮播图配置
+                <el-icon> <Picture /> </el-icon>轮播图配置
               </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
