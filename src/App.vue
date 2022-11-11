@@ -2,9 +2,12 @@
 import { reactive, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { localGet, pathMap } from '@/utils';
+import { getExplore } from 'realize-utils'
 
 const ENV = import.meta.env;
 console.log(ENV);
+
+console.log(getExplore())
 
 // 不需要菜单的路径数组
 const noMenu = ['/login'];
