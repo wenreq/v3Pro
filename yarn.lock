@@ -1706,6 +1706,11 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+ny-utils@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ny-utils/-/ny-utils-1.0.0.tgz#01b9142d6b1d57efb42b774b27d4b74dcdb89ea5"
+  integrity sha512-qNJJ0KYhwx9z0yr85QTpXEVKTDQGPQYiTXUA3eVk62rRLehABZtp9nW9Y05tT3ZbbxUBF8fp9Lm70wATTPDqVQ==
+
 once@^1.3.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/once/-/once-1.4.0.tgz"
